@@ -16,49 +16,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tea</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
+<div class="contact">
+    <h1>CONTACT US</h1>
+    <h4>Have a tip? A scandal? A misplaced parasol? Write to The Tea — your secret is safe with us (unless it’s
+        juicy).</h4>
+    <?php if (!empty($success)): ?>
+        <p class="success">
+        <h3>Thank you for your message! <i>The Tea</i> will sip it shortly. &nbsp; ☕ </h3>
+        </p>
+    <?php endif; ?>
 
-    <div class="content">
-        <div class="header">
-            <img class="heroImg" src="images/theTT.png" alt="heroImg"> <br>
-            <nav class="navLinks">
-                <a href="index.html">DASHBOARD</a>
-                <a href="addPost.html">SPILL TEA</a>
-                <a href="account.html">ACCOUNT</a>
-                <a href="contact.html">CONTACT US</a>
-            </nav>
+    <form id="contactForm" class="contactForm" method="POST" action="contact.php">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" placeholder="Message" rows="2" required></textarea>
+        <div class="formButtons">
+            <button type="submit">SEND</button>
         </div>
-        <div class="contact">
-            <h1>CONTACT US</h1>
-            <h4>Have a tip? A scandal? A misplaced parasol? Write to The Tea — your secret is safe with us (unless it’s
-                juicy).</h4>
-            <form id="contactForm" class="contactForm" method="POST" action="contact.php">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="message" placeholder="Message" rows="2" required></textarea>
-                <div class="formButtons">
-                    <button type="submit">SEND</button>
-                </div>
-                <p id="form-status"></p>
-            </form>
-        </div>
+        <p id="form-status"></p>
+    </form>
+</div>
 
 
-        <footer class="footer">
-            <h3>&copy; &nbsp; 2025 The Tea &nbsp;&nbsp;|&nbsp;&nbsp; All gossip served hot &nbsp; ☕ </h3>
-        </footer>
-        <script src="script.js"></script>
-    </div>
-</body>
-
-</html>
+<?php include 'footer.php'; ?>

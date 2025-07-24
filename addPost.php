@@ -26,59 +26,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'header.php'; ?>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Tea</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
 
-<body>
-    <div class="content">
-        <div class="header">
-            <img class="heroImg" src="images/theTT.png" alt="heroImg" />
-            <br />
-            <nav class="navLinks">
-                <a href="index.php">DASHBOARD</a>
-                <a href="addPost.php">SPILL TEA</a>
-                <a href="account.php">ACCOUNT</a>
-                <a href="contact.php">CONTACT US</a>
-            </nav>
+
+<section class="blogPostSection">
+    <h1>FRESH GOSSIP 🍃</h1>
+
+    <!-- Correct and single form -->
+    <form id="blogPostForm" class="blogForm" action="addPost.php" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Post Title" required />
+        <input type="text" name="author" placeholder="Author Name" />
+
+        <label for="postContent">
+            <h4>Dearest Reader,</h4>
+        </label>
+        <textarea name="content" id="postContent" placeholder="It has come to this author’s attention …" rows="5" required></textarea>
+
+        <input type="file" name="coverImage" accept="image/*" />
+
+        <div class="formButtons">
+            <button type="submit" name="submit">PUBLISH</button>
+            <button type="button" id="saveDraftBtn">SAVE DRAFT</button>
         </div>
 
-        <section class="blogPostSection">
-            <h1>FRESH GOSSIP 🍃</h1>
+        <p id="blogStatus"></p>
+    </form>
+</section>
 
-            <!-- Correct and single form -->
-            <form id="blogPostForm" class="blogForm" action="addPost.php" method="POST" enctype="multipart/form-data">
-                <input type="text" name="title" placeholder="Post Title" required />
-                <input type="text" name="author" placeholder="Author Name" />
-
-                <label for="postContent">
-                    <h4>Dearest Reader,</h4>
-                </label>
-                <textarea name="content" id="postContent" placeholder="It has come to this author’s attention …" rows="5" required></textarea>
-
-                <input type="file" name="coverImage" accept="image/*" />
-
-                <div class="formButtons">
-                    <button type="submit" name="submit">PUBLISH</button>
-                    <button type="button" id="saveDraftBtn">SAVE DRAFT</button>
-                </div>
-
-                <p id="blogStatus"></p>
-            </form>
-        </section>
-
-        <footer class="footer">
-            <h3>&copy; 2025 The Tea &nbsp;&nbsp;|&nbsp;&nbsp; All gossip served hot ☕</h3>
-        </footer>
-
-        <script src="script.js"></script>
-    </div>
-</body>
-
-</html>
+<?php include 'footer.php'; ?>

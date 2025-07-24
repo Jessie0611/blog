@@ -97,6 +97,52 @@ h4 {
     color: #A09CC2;
 }
 
+/* ------ CREATE ACC FORM ------ */
+
+.create {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    max-width: 1000px;
+    margin: 2rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #A09CC2;
+}
+
+.createAccountForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.createAccountForm input {
+    padding: 0.2rem;
+    font-size: 1.1rem;
+    max-width: 300px;
+    border: 1px solid #ede9da;
+    border-radius: 4px;
+}
+
+
+.createAccountForm button {
+    padding: 0.4rem;
+    font-weight: bold;
+    max-width: 105px;
+    background-color: #A09CC2;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.createAccountForm button:hover {
+    background-color: #182447;
+    color: #ffffff;
+
+}
+
 /* ------ ADD POST ------ */
 .post {
     padding: 30px;
