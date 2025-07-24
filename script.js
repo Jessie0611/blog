@@ -27,6 +27,7 @@ document.getElementById("saveDraftBtn").addEventListener("click", function () {
 
     const draft = {
         title,
+        author,
         content,
         savedAt: new Date().toISOString()
     };
