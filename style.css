@@ -143,6 +143,30 @@ h4 {
 
 }
 
+/* ------ ACCOUNT PAGE ------ */
+
+.account {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #A09CC2;
+    text-align: center;
+}
+
+.account h1 {
+    color: #2c3f76;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.account p {
+    font-size: 1.1rem;
+    color: #182447;
+}
+
+
 /* ------ ADD POST ------ */
 .post {
     padding: 30px;

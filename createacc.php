@@ -2,7 +2,7 @@
 include 'database.php';
 
 $errors = [];
-$success = false;
+$loginErrors = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['createAccount'])) {
     $username = trim($_POST['username']);
@@ -37,7 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['createAccount'])) {
             $stmt = $conn->prepare("INSERT INTO users (username, password, email, displayName, created_at) VALUES (?, ?, ?, ?, NOW())");
             $stmt->bind_param("ssss", $username, $hashedPassword, $email, $displayName);
             if ($stmt->execute()) {
-                $success = true;
+                session_start();
+                $_SESSION['userID'] = $conn->insert_id;
+                $_SESSION['username'] = $username;
+                header("Location: account.php");
+                exit();
             } else {
                 $errors[] = "Error creating account. Please try again.";
             }
@@ -46,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['createAccount'])) {
     }
 }
 
-$loginErrors = [];
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
     $loginUsername = trim($_POST['loginUsername']);
     $loginPassword = $_POST['loginPassword'];
@@ -65,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
                 session_start();
                 $_SESSION['userID'] = $user['userID'];
                 $_SESSION['username'] = $loginUsername;
-                header("Location: index.php");
+                header("Location: account.php");
                 exit();
             } else {
                 $loginErrors[] = "Incorrect password.";
@@ -78,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
 }
 ?>
 
+
 <?php include 'header.php'; ?>
 
 <div class="create">
@@ -85,28 +89,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
     <div style="flex: 1 1 350px; max-width: 400px;">
         <h1>CREATE ACCOUNT</h1>
 
-        <?php if ($success): ?>
-            <p class="success">Account created successfully! You can now log in.</p>
-        <?php else: ?>
-            <?php if (!empty($errors)): ?>
-                <div class="errors" style="background:#fdd; color:#900; padding:0.5rem; border-radius:4px; margin-bottom:1rem;">
-                    <ul>
-                        <?php foreach ($errors as $error): ?>
-                            <li><?= htmlspecialchars($error) ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-
-            <form action="createacc.php" method="POST" class="createAccountForm" novalidate>
-                <input type="text" name="username" placeholder="Username" required value="<?= isset($username) ? htmlspecialchars($username) : '' ?>" />
-                <input type="text" name="displayName" placeholder="Display/Author Name" required value="<?= isset($displayName) ? htmlspecialchars($displayName) : '' ?>" />
-                <input type="email" name="email" placeholder="Email" required value="<?= isset($email) ? htmlspecialchars($email) : '' ?>" />
-                <input type="password" name="password" placeholder="Password" required />
-                <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
-                <br><button type="submit" name="createAccount">Create Account</button><br>
-            </form>
+        <?php if (!empty($errors)): ?>
+            <div class="errors" style="background:#fdd; color:#900; padding:0.5rem; border-radius:4px; margin-bottom:1rem;">
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li><?= htmlspecialchars($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         <?php endif; ?>
+
+        <form action="createacc.php" method="POST" class="createAccountForm" novalidate>
+            <input type="text" name="username" placeholder="Username" required value="<?= isset($username) ? htmlspecialchars($username) : '' ?>" />
+            <input type="text" name="displayName" placeholder="Display/Author Name" required value="<?= isset($displayName) ? htmlspecialchars($displayName) : '' ?>" />
+            <input type="email" name="email" placeholder="Email" required value="<?= isset($email) ? htmlspecialchars($email) : '' ?>" />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+            <br><button type="submit" name="createAccount">Create Account</button><br>
+        </form>
     </div>
 
     <div style="flex: 1 1 300px; max-width: 400px;">
