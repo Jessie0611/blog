@@ -1,14 +1,14 @@
 <?php
-$userID = $_SESSION['userID'] ?? 1; // fallback to 1 if not logged in (for testing)
+$userID = $_SESSION['id'] ?? 1; // fallback to 1 if not logged in (for testing)
 
-// Fetch display name from database
-$displayName = '';
-if ($stmt = $conn->prepare("SELECT displayName FROM users WHERE userID = ?")) {
-    $stmt->bind_param("i", $userID);
-    $stmt->execute();
-    $stmt->bind_result($displayName);
-    $stmt->fetch();
-    $stmt->close();
+$username = '';
+
+$stmt = $pdo->prepare("SELECT username FROM users WHERE id = ?");
+$stmt->execute([$userID]);
+$row = $stmt->fetch();
+
+if ($row) {
+    $username = $row['username'];
 }
 ?>
 
@@ -24,7 +24,7 @@ if ($stmt = $conn->prepare("SELECT displayName FROM users WHERE userID = ?")) {
     <form id="blogPostForm" class="blogForm" action="addPost.php" method="POST" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Post Title" required />
         <h4>
-            <b>Author Name :</b> <?php echo htmlspecialchars($displayName); ?>
+            <b>Author Name :</b> <?php echo htmlspecialchars($username); ?>
         </h4>
 
         <label for="postContent">
@@ -32,7 +32,7 @@ if ($stmt = $conn->prepare("SELECT displayName FROM users WHERE userID = ?")) {
         </label>
         <textarea name="content" id="postContent" placeholder="It has come to this author’s attention …" rows="5" required></textarea>
         <h4>
-            <b>Author Name :</b> <?php echo htmlspecialchars($displayName); ?>
+            <b>Author Name :</b> <?php echo htmlspecialchars($username); ?>
         </h4>
         <input type="file" name="coverImage" accept="image/*" />
 

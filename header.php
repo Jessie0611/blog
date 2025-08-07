@@ -1,7 +1,7 @@
 <!-- header.php -->
 <?php
 session_start();
-include 'database.php';
+include 'includes\dbh.inc.php';
 ?>
 
 <!DOCTYPE html>

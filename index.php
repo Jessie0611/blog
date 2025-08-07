@@ -1,23 +1,28 @@
 <?php include 'header.php'; ?>
 
-
 <div class="row">
     <div class="leftColumn">
         <div class="post">
             <!-- Dynamic posts from database -->
             <?php
-            $result = $conn->query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 5");
-            while ($row = $result->fetch_assoc()) {
+            // Fetch latest 5 posts using PDO
+            $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 5");
+            $posts = $stmt->fetchAll();
+
+            foreach ($posts as $row) {
                 echo "<div class='post'>";
                 echo "<h2>" . htmlspecialchars($row['title']) . "</h2>";
+
                 if (!empty($row['coverImage'])) {
                     echo "<img src='uploads/" . htmlspecialchars($row['coverImage']) . "' alt='Post Cover' style='width:100%; max-height:300px; object-fit:cover;'>";
                 }
+
                 echo "<p>" . nl2br(substr(htmlspecialchars($row['content']), 0, 300)) . "...</p>";
                 echo "<a href='viewPost.php?id=" . $row['postID'] . "' class='readMore'>Read More</a>";
                 echo "</div>";
             }
             ?>
+
 
         </div>
     </div>
