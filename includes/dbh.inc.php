@@ -8,13 +8,9 @@ $db   = 'thetea';          // your database name
 $user = 'root';    // your MySQL username
 $pass = '';    // your MySQL password
 
-// Create a connection
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Set character set to UTF-8
-$conn->set_charset("utf8mb4");
-
-// Optional: Check connection (for development)
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try { //PDO php data objects - flexible for using various types of db
+    $pdo = new PDO($dsn, $dbusername, $dbpassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection Failed: " . $e->getMessage());
 }

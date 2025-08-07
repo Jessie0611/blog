@@ -1,6 +1,4 @@
 <?php
-include 'database.php';
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $conn->real_escape_string($_POST['name']);
     $email = $conn->real_escape_string($_POST['email']);
