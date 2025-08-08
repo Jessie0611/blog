@@ -36,12 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ];
             $_SESSION["signup_data"] = $signupData;
 
-            header("Location: ../index.php");
+            header("Location: ../account.php");
             die();
         }
-
-        createUser($pdo, $pwd, $username, $email);
-        header("Location: ../index.php?signup=success");
 
         $pdo = null;
         $stmt = null;
@@ -54,18 +51,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
         $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
         $stmt->bindParam(":username", $username);
+        $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
         $stmt->bindParam(":pwd", $hashedPwd);
         $stmt->bindParam(":email", $email);
         $stmt->execute([$username, $pwd, $email]);
         $pdo = null;
         $stmt = null;
-        header("Location: ../index.php");
+        header("Location: ../createacc.php");
 
         die();
     } catch (PDOException $e) {
         die("Query Failed: " . $e->getMessage());
     }
 } else {
-    header("Location: ../index.php");
+    header("Location: ../createacc.php");
     die();
 }

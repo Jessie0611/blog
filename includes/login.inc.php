@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //error handlers
         $errors = [];
 
-        if (isEmpty($username, $pwd)) {
+        if (isEmpty($username) || isEmpty($pwd)) {
             $errors["empty_input"] = "Fill in all fields!";
         }
         $result = getUser($pdo, $username);
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($errors) {
             $_SESSION["errors_login"] = $errors;
 
-            header("Location: ../index.php");
+            header("Location: ../createacc.php");
             die();
         }
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_id"] = $result["id"];
         $_SESSION["user_username"] = htmlspecialchars($result["username"]);
         $_SESSION['last_regeneration'] = time();
-        header("Location: ../index.php?login=success");
+        header("Location: ../account.php");
         $pdo = null;
         $statement = null;
         die();
@@ -45,6 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Query Failed: " . $e->getMessage());
     }
 } else {
-    header("Location: ../index.php");
+    header("Location: ../createacc.php");
     die();
 }

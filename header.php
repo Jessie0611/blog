@@ -1,7 +1,7 @@
 <!-- header.php -->
 <?php
-session_start();
-include 'includes\dbh.inc.php';
+require_once 'includes/dbh.inc.php';
+require_once 'includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +23,6 @@ include 'includes\dbh.inc.php';
                 <a href="index.php">DASHBOARD</a>
                 <a href="contact.php">CONTACT</a>
                 <a href="addPost.php">SPILL TEA</a>
-                <a href="account.php">ACCOUNT</a>
+                <a href="createacc.php">ACCOUNT</a>
             </nav>
         </div>

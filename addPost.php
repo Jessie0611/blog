@@ -1,4 +1,6 @@
 <?php
+require_once 'includes/dbh.inc.php'; // ✅ Add this to define $pdo
+
 $userID = $_SESSION['id'] ?? 1; // fallback to 1 if not logged in (for testing)
 
 $username = '';

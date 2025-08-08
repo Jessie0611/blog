@@ -1,34 +1,15 @@
 <?php
-session_start(); // Start the session
+include 'includes/dbh.inc.php';
+require_once 'includes/signup_v.inc.php';
+require_once 'includes/login_v.inc.php';
+include 'header.php';
 
-// Redirect if not logged in
-if (!isset($_SESSION['userID'])) {
-    header("Location: createacc.php");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: account.php");
     exit();
 }
 
-// Assume $pdo is your PDO connection, created earlier
-$userID = $_SESSION['userID'];
-
-try {
-    $stmt = $pdo->prepare("SELECT username FROM users WHERE id = :id");
-    $stmt->execute(['id' => $userID]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        $username = $user['username'];
-    } else {
-        // User not found — fallback or handle error
-        $username = "Guest";
-    }
-} catch (PDOException $e) {
-    // Handle query error gracefully
-    $username = "Guest";
-    // Optionally log $e->getMessage() somewhere
-}
 ?>
-
-<?php include 'header.php'; ?>
 
 <div class="account">
     <br>

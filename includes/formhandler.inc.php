@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(":username", $username);
         $stmt->bindParam(":pwd", $hashedPwd);
         $stmt->bindParam(":email", $email);
-        $stmt->execute([$username, $pwd, $email]);
+        $stmt->execute();
         $pdo = null;
         $stmt = null;
         header("Loocation: index.php");
@@ -27,5 +27,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Query Failed: " . $e->getMessage());
     }
 } else {
-    header("Loocation: ../index.php");
+    header("Location: ../index.php");
 }

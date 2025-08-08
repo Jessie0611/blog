@@ -5,18 +5,20 @@ declare(strict_types=1);
 function signupInputs()
 {
     if (isset($_SESSION["signup_data"]["username"]) && !isset($_SESSION["errors_signup"]["username_taken"])) {
-        echo '<input type="text" name="username" placeholder="Username" value="' . $_SESSION["signup_data"]["username"] . '"><br>';
+        echo '<input type="text" name="username" class="createAccountForm" placeholder="Author Name" value="' . $_SESSION["signup_data"]["username"] . '"><br>';
     } else {
-        echo '<input type="text" name="username" placeholder="Username"> <br>';
+        echo '<input type="text" name="username" class="createAccountForm" placeholder="Author Name"> <br>';
     }
 
-    echo ' <input type="password" name="pwd" placeholder="Password"><br>';
+    echo ' <input type="password" name="pwd" class="createAccountForm" placeholder="Password"><br>';
 
     if (isset($_SESSION["signup_data"]["email"]) && !isset($_SESSION["errors_signup"]["email_used"]) && !isset($_SESSION["errors_signup"]["invalid_email"])) {
-        echo '<input type="text" name="email" placeholder="E-Mail" value="' . $_SESSION["signup_data"]["email"] . '"><br>';
+        echo '<input type="text" name="email" class="createAccountForm" placeholder="E-Mail" value="' . $_SESSION["signup_data"]["email"] . '"><br>';
     } else {
-        echo '<input type="text" name="email" placeholder="E-Mail"><br>';
+        echo '<input type="text" name="email" class="createAccountForm" placeholder="E-Mail"><br>';
     }
+
+    echo '<br><button type="submit" name="createAccount">Create Account</button><br>';
 }
 
 function checkSignupErrors()

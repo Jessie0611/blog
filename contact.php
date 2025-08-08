@@ -1,19 +1,26 @@
 <?php
+require_once 'includes/dbh.inc.php';
+
+$success = false;
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $conn->real_escape_string($_POST['name']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $message = $conn->real_escape_string($_POST['message']);
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $message = $_POST['message'] ?? '';
 
-    $stmt = $conn->prepare("INSERT INTO contact_messages (name, email, message) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $message);
-    $stmt->execute();
-    $stmt->close();
+    try {
+        $stmt = $pdo->prepare("
+          INSERT INTO contact_messages (name, email, message, submitted_at)
+          VALUES (?, ?, ?, NOW())
+        ");
+        $stmt->execute([$name, $email, $message]);
 
-    // Optional: redirect or show confirmation
-    $success = true;
+        $success = true;
+    } catch (PDOException $e) {
+        die("Failed to submit contact form: " . $e->getMessage());
+    }
 }
 ?>
-
 <?php include 'header.php'; ?>
 
 
