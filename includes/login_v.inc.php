@@ -8,9 +8,9 @@ function loginInputs()
 
     echo '<form action="includes/login.inc.php" method="POST" class="createAccountForm" novalidate>';
 
-    echo '<input type="text" name="loginUsername" placeholder="Username" required value="' . htmlspecialchars($loginUsername) . '"> <br>';
+    echo '<input type="text" name="loginUsername"  class="createAccountForm" placeholder="Username" required value="' . htmlspecialchars($loginUsername) . '"> <br>';
 
-    echo '<input type="password" name="loginPassword" placeholder="Password" required><br>';
+    echo '<input type="password" name="loginPassword"  class="createAccountForm" placeholder="Password" required><br>';
 
     echo '<br><button type="submit" name="login">Login</button><br>';
     echo '</form>';

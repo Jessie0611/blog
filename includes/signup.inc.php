@@ -5,11 +5,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
 
     try {
-        require_once 'dbh.inc.php'; //database connection
-        require_once 'signup_m.inc.php'; //model
-        require_once 'signup_c.inc.php'; //control
+        require_once 'dbh.inc.php';
+        require_once 'signup_m.inc.php';
+        require_once 'signup_c.inc.php';
+        require_once 'config.php';
 
-        //error handlers
         $errors = [];
 
         if (isEmpty($username, $pwd, $email)) {
@@ -25,40 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors["email_used"] = "E-Mail already registered!";
         }
 
-        require_once 'config.php';
-
         if ($errors) {
             $_SESSION["errors_signup"] = $errors;
-            //the below code will keep the data input by the user if errors exist so they do not have to retype:
-            $signupData = [
+            $_SESSION["signup_data"] = [
                 "username" => $username,
                 "email" => $email
             ];
-            $_SESSION["signup_data"] = $signupData;
-
-            header("Location: ../account.php");
+            header("Location: ../createacc.php");
             die();
         }
 
-        $pdo = null;
-        $stmt = null;
+        //use your controller logic
+        createUser($pdo, $pwd, $username, $email);
 
-        $query = "INSERT INTO users (username, pwd, email) VALUES ( ?, ?, ?);";
-
-        $stmt = $pdo->prepare($query);
-        $options = [
-            'cost' => 12
-        ];
-        $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
-        $stmt->bindParam(":username", $username);
-        $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
-        $stmt->bindParam(":pwd", $hashedPwd);
-        $stmt->bindParam(":email", $email);
-        $stmt->execute([$username, $pwd, $email]);
-        $pdo = null;
-        $stmt = null;
-        header("Location: ../createacc.php");
-
+        //Redirect on success
+        header("Location: ../createacc.php?signup=success");
         die();
     } catch (PDOException $e) {
         die("Query Failed: " . $e->getMessage());

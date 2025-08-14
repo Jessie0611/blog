@@ -34,13 +34,8 @@ unset($_SESSION['errors_login'], $_SESSION['login_data']);
 
     <div style="flex: 1 1 300px; max-width: 400px;">
         <h1>LOGIN</h1>
-
-
         <?php loginInputs(); ?>
-
         <?php checkLoginErrors(); ?>
-
-
     </div>
 
 </div>
