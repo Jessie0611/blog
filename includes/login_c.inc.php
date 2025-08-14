@@ -10,20 +10,12 @@ function isEmpty(string $username, string $pwd)
         return false;
     }
 }
-
-function isUsernameIncorrect(bool|array $results) //if either bool or array we want to accept the results
+function isUsernameIncorrect(bool|array $results): bool
 {
-    if (!$results) {
-        return true;
-    } else {
-        return false;
-    }
+    return !$results;
 }
-function isPwdIncorrect(string $pwd, string $hashedPwd) //if either bool or array we want to accept the results
+
+function isPwdIncorrect(string $pwd, string $hashedPwd): bool
 {
-    if (password_verify($pwd, $hashedPwd)) {
-        return true;
-    } else {
-        return false;
-    }
+    return !password_verify($pwd, $hashedPwd);
 }

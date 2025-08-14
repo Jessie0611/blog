@@ -12,9 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once 'config.php';      // Session start
 
         $errors = [];
-
         // Input validation
-        if (isEmpty($username) || isEmpty($pwd)) {
+        if (isEmpty($username, $pwd)) {
             $errors["empty_input"] = "Fill in all fields!";
         } else {
             $result = getUser($pdo, $username);

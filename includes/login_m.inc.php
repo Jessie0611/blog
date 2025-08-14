@@ -11,8 +11,3 @@ function getUser(PDO $pdo, string $username): array|false
 
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: false;
 }
-
-function isPwdIncorrect(string $pwd, string $hashedPwd): bool
-{
-    return !password_verify($pwd, $hashedPwd);
-}
