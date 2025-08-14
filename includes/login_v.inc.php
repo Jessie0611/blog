@@ -7,24 +7,13 @@ function loginInputs()
     $loginUsername = $_SESSION["login_data"]["loginUsername"] ?? '';
 
     echo '<form action="includes/login.inc.php" method="POST" class="createAccountForm" novalidate>';
-
-    echo '<input type="text" name="loginUsername"  class="createAccountForm" placeholder="Username" required value="' . htmlspecialchars($loginUsername) . '"> <br>';
-
-    echo '<input type="password" name="loginPassword"  class="createAccountForm" placeholder="Password" required><br>';
-
-    echo '<br><button type="submit" name="login">Login</button><br>';
+    echo '<input type="text" name="loginUsername" placeholder="Username" value="' . htmlspecialchars($loginUsername) . '">';
+    echo '<input type="password" name="loginPassword" placeholder="Password">';
+    echo '<button type="submit" name="login">Login</button>';
     echo '</form>';
-}
 
-function outputUsername()
-{
-    if (isset($_SESSION["user_id"])) {
-        echo "You are logged in as " . htmlspecialchars($_SESSION["user_username"]);
-    } else {
-        echo "You are not logged in.";
-    }
+    unset($_SESSION["login_data"]);
 }
-
 
 function checkLoginErrors()
 {
@@ -36,5 +25,14 @@ function checkLoginErrors()
         }
         unset($_SESSION["errors_login"]);
     } else {
+    }
+}
+
+function outputUsername()
+{
+    if (isset($_SESSION["user_id"])) {
+        echo "You are logged in as " . htmlspecialchars($_SESSION["user_username"]);
+    } else {
+        echo "You are not logged in.";
     }
 }

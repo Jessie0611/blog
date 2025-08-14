@@ -16,10 +16,6 @@ $signupData = $_SESSION['signup_data'] ?? [];
 
 $loginErrors = $_SESSION['errors_login'] ?? [];
 $loginData = $_SESSION['login_data'] ?? [];
-
-// Clear errors after displaying once
-unset($_SESSION['errors_signup'], $_SESSION['signup_data']);
-unset($_SESSION['errors_login'], $_SESSION['login_data']);
 ?>
 
 <div class="create">
