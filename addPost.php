@@ -1,18 +1,34 @@
-<?php
-require_once 'includes/dbh.inc.php'; // ✅ Add this to define $pdo
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+require_once 'includes/dbh.inc.php';
 
-$userID = $_SESSION['id'] ?? 1; // fallback to 1 if not logged in (for testing)
+$title = $_POST['title'];
+$content = $_POST['content'];
+$userID = $_SESSION['id'] ?? 1; // fallback if not logged in
 
-$username = '';
+// Handle file upload
+$coverImageName = '';
+if (isset($_FILES['coverImage']) && $_FILES['coverImage']['error'] === UPLOAD_ERR_OK) {
+$uploadDir = 'uploads/';
+$coverImageName = basename($_FILES['coverImage']['name']);
+$uploadPath = $uploadDir . $coverImageName;
 
-$stmt = $pdo->prepare("SELECT username FROM users WHERE id = ?");
-$stmt->execute([$userID]);
-$row = $stmt->fetch();
-
-if ($row) {
-    $username = $row['username'];
+if (!move_uploaded_file($_FILES['coverImage']['tmp_name'], $uploadPath)) {
+die("Failed to upload image.");
 }
-?>
+}
+
+// Insert post
+try {
+$stmt = $pdo->prepare("INSERT INTO posts (title, content, coverImage, userID, created_at) VALUES (?, ?, ?, ?, NOW())");
+$stmt->execute([$title, $content, $coverImageName, $userID]);
+
+header("Location: index.php?post=success");
+exit;
+} catch (PDOException $e) {
+die("Error inserting post: " . $e->getMessage());
+}
+}
+
 
 
 <?php include 'header.php'; ?>

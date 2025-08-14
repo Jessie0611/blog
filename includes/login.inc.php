@@ -1,50 +1,55 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $pwd = $_POST["pwd"];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST["username"] ?? '';
+    $pwd = $_POST["pwd"] ?? '';
 
     try {
-        require_once 'dbh.inc.php'; //database connection -- this order of  require_once does matter
-        require_once 'login_m.inc.php'; //model
-        require_once 'login_c.inc.php'; // control
-        //error handlers
+        require_once 'dbh.inc.php';     // DB connection
+        require_once 'login_m.inc.php'; // Model
+        require_once 'login_c.inc.php'; // Controller
+        require_once 'config.php';      // Session start
+
         $errors = [];
 
+        // Input validation
         if (isEmpty($username) || isEmpty($pwd)) {
             $errors["empty_input"] = "Fill in all fields!";
-        }
-        $result = getUser($pdo, $username);
+        } else {
+            $result = getUser($pdo, $username);
 
-        if (isUsernameIncorrect($results)) {
-            $errors["login_incorrect"] = "Incorrect username!";
+            // If no user found
+            if (!$result || isUsernameIncorrect($result)) {
+                $errors["login_incorrect"] = "Incorrect login information!";
+            }
+            // If password is wrong
+            elseif (isPwdIncorrect($pwd, $result["pwd"])) {
+                $errors["login_incorrect"] = "Incorrect login information!";
+            }
         }
-        if (!sUsernameIncorrect($result) && isPwdIncorrect($pwd, $result["pwd"])) {
-            $errors["login_incorrect"] = "Incorrect Login Information!";
-        }
-        require_once 'config.php';
 
-        if ($errors) {
+        // Handle login failure
+        if (!empty($errors)) {
             $_SESSION["errors_login"] = $errors;
-
+            $_SESSION["login_data"]["loginUsername"] = $username;
             header("Location: ../createacc.php");
-            die();
+            exit();
         }
 
+        // Successful login: regenerate session
         $newSessionID = session_create_id();
-        $sessionID = $newSessionID . "" . $result["id"];
-        session_id($sessionID);
+        session_id($newSessionID . $result["id"]);
 
         $_SESSION["user_id"] = $result["id"];
-        $_SESSION["user_username"] = htmlspecialchars($result["username"]);
+        $_SESSION["user_username"] = $result["username"];
         $_SESSION['last_regeneration'] = time();
+
         header("Location: ../account.php");
-        $pdo = null;
-        $statement = null;
-        die();
+        exit();
     } catch (PDOException $e) {
         die("Query Failed: " . $e->getMessage());
     }
 } else {
     header("Location: ../createacc.php");
-    die();
+    exit();
 }

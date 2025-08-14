@@ -36,11 +36,8 @@ unset($_SESSION['errors_login'], $_SESSION['login_data']);
         <h1>LOGIN</h1>
 
 
-        <form action="includes/logout.inc.php" method="POST" class="createAccountForm" novalidate>
-            <input type="text" name="loginUsername" placeholder="Username" required value="<?= isset($loginUsername) ? htmlspecialchars($loginUsername) : '' ?>" />
-            <input type="password" name="loginPassword" placeholder="Password" required />
-            <br><button type="submit" name="login">Login</button><br>
-        </form>
+        <?php loginInputs(); ?>
+
         <?php checkLoginErrors(); ?>
 
 
