@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="email" name="email" placeholder="Email" required>
         <textarea name="message" placeholder="Message" rows="2" required></textarea>
         <div class="formButtons">
-            <button type="submit">SEND</button>
+            <button type="submit">Send</button>
         </div>
         <p id="form-status"></p>
     </form>

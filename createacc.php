@@ -19,7 +19,7 @@ $loginData = $_SESSION['login_data'] ?? [];
 ?>
 
 <div class="create">
-
+    <br>
     <div style="flex: 1 1 350px; max-width: 400px;">
         <h1>CREATE ACCOUNT</h1>
         <?php signupInputs(); ?>
@@ -33,7 +33,7 @@ $loginData = $_SESSION['login_data'] ?? [];
         <?php loginInputs(); ?>
         <?php checkLoginErrors(); ?>
     </div>
-
+    <br> <br> <br>
 </div>
-
+<br>
 <?php include 'footer.php'; ?>

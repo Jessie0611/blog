@@ -19,18 +19,21 @@ $username = $_SESSION['user_username'] ?? 'Guest';
 
 ?>
 
-<div class="account" style="display: flex; align-items: center; justify-content: space-between; max-width: 700px; margin: 2rem auto; padding: 1rem; border: 1px solid #ddd; border-radius: 8px;">
-
-    <div>
-        <h1>Hello, <?= htmlspecialchars($username) ?>!</h1>
-        <h4>Welcome to your account page. You’re now sipping The Tea in style.</h4>
-    </div>
-
-    <form action="includes/logout.inc.php" method="POST" style="margin: 0;">
+<div class="account">
+    <form action="includes/logout.inc.php" class="createAccountForm" method="POST" style="margin: 0;">
         <button type="submit" name="logout" style="padding: 0.4rem 0.8rem; background-color: #A09CC2; color: white; border: none; border-radius: 4px; cursor: pointer;">
             Logout
         </button>
-    </form>
+        <h1>Hello, <?= htmlspecialchars($username) ?>!</h1>
+        <br>
+        <br>
+        <h4>Welcome to your account page. You’re now sipping The Tea in style.
+            <br> <br> <br> <br> <br> <br>
+        </h4>
+</div>
+
+
+</form>
 
 </div>
 
