@@ -6,7 +6,7 @@
             <!-- Dynamic posts from database -->
             <?php
             // Fetch latest 5 posts using PDO
-            $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 5");
+            $stmt = $pdo->query("SELECT * FROM posts WHERE status = 'published';");
             $posts = $stmt->fetchAll();
 
             foreach ($posts as $row) {
@@ -37,15 +37,6 @@
                 wisteria-lined lanes has quickly become the most whispered-about event of the week...
             </p>
             <hr>
-            <img src="images/roset.jpeg" width="75%">
-
-            <p><b>Roses, Ribbons, and Reckless Rides: <br> Lady Ashcombe Spills the Tea</b> <br>
-                The incident took place just past three o’clock, when tea was steeping and eyes were elsewhere.
-                But fate, ever the meddler, ensured that Lady Vivenne Ashcombe was tending her roses on that
-                very path—and witnessed the entire spectacle, wide-brimmed hat and all. According to her account
-                (repeated many times since): “They were tangled together like ribbon in a sewing basket. And not
-                just because of the ride.”...
-            </p>
         </div>
     </div>
 </div>

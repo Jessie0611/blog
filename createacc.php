@@ -33,7 +33,7 @@ $loginData = $_SESSION['login_data'] ?? [];
         <?php loginInputs(); ?>
         <?php checkLoginErrors(); ?>
     </div>
-    <br> <br> <br>
+    <br>
 </div>
 <br>
 <?php include 'footer.php'; ?>

@@ -180,6 +180,10 @@ h4 {
 
 
 /* ------ ADD POST ------ */
+.coverImage {
+    width: 500px;
+}
+
 .post {
     padding: 30px;
     margin-top: 10px;
@@ -233,7 +237,7 @@ h4 {
 
 .formButtons {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.9rem;
     margin-top: 0.5rem;
 }
 
@@ -245,6 +249,29 @@ h4 {
     font-size: 0.9rem;
     margin-top: 0.5rem;
     color: green;
+}
+
+#blogStatus.success {
+    color: green;
+    font-size: large;
+
+}
+
+#blogStatus.error {
+    color: red;
+    font-size: large;
+
+}
+
+#blogStatus.info {
+    color: blue;
+    font-size: large;
+
+}
+
+.success {
+    color: green;
+    font-size: large;
 }
 
 /* ------   CONTACT FORM ------ */
