@@ -14,11 +14,11 @@
                 echo "<h2>" . htmlspecialchars($row['title']) . "</h2>";
 
                 if (!empty($row['coverImage'])) {
-                    echo "<img src='uploads/" . htmlspecialchars($row['coverImage']) . "' alt='Post Cover' style='width:100%; max-height:300px; object-fit:cover;'>";
+                    echo "<img src='uploads/" . htmlspecialchars($row['coverImage']) . "' alt='Post Cover' style='width:50%; object-fit:cover;'>";
                 }
 
-                echo "<p>" . nl2br(substr(htmlspecialchars($row['content']), 0, 300)) . "...</p>";
-                echo "<a href='viewPost.php?id=" . $row['postID'] . "' class='readMore'>Read More</a>";
+                echo "<p>" . nl2br(substr(htmlspecialchars($row['content']), 0, 300)) . "</p>";
+                echo "<a href='viewPost.php?id=" . $row['postID'] . "' class='readMore'>Read More </a>";
                 echo "</div>";
             }
             ?>
@@ -37,6 +37,7 @@
                 wisteria-lined lanes has quickly become the most whispered-about event of the week...
             </p>
             <hr>
+
         </div>
     </div>
 </div>

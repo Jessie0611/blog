@@ -60,7 +60,7 @@ img:hover {
 }
 
 a:hover {
-    background-color: #182447;
+    background-color: #v;
 
 }
 
@@ -136,8 +136,6 @@ h4 {
     cursor: pointer;
 }
 
-
-
 .createAccountForm button {
     padding: 0.4rem;
     font-weight: bold;
@@ -178,6 +176,27 @@ h4 {
     color: #182447;
 }
 
+.post-summary {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.post-summary img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.post-summary {
+    border: 1px solid #A09CC2;
+    padding: .7rem;
+    margin-bottom: .7rem;
+}
+
+.delete {
+    float: right;
+}
 
 /* ------ ADD POST ------ */
 .coverImage {
@@ -197,7 +216,6 @@ h4 {
     border-radius: 8px;
     box-shadow: 0 2px 5px #A09CC2;
 }
-
 
 .blogForm {
     display: flex;
@@ -264,13 +282,46 @@ h4 {
 }
 
 #blogStatus.info {
-    color: blue;
+    color: #182447;
     font-size: large;
 
 }
 
 .success {
     color: green;
+    font-size: large;
+}
+
+/*------- VIEW POST ------- */
+.Vpost {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #A09CC2;
+    text-align: center;
+}
+
+.viewPost {
+    max-width: 990px;
+    margin: 2rem auto;
+}
+
+.delete {
+    padding: 0.3rem 0.6rem;
+    background-color: #C95F5F;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.readMore {
+    display: inline-block;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: #A09CC2;
     font-size: large;
 }
 

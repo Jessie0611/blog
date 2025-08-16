@@ -19,12 +19,12 @@ $loginData = $_SESSION['login_data'] ?? [];
 ?>
 
 <div class="create">
-    <br>
+    <br> <br> <br>
     <div style="flex: 1 1 350px; max-width: 400px;">
         <h1>CREATE ACCOUNT</h1>
         <?php signupInputs(); ?>
         <?php checkSignupErrors(); ?>
-
+        <br>
 
     </div>
 
@@ -32,7 +32,9 @@ $loginData = $_SESSION['login_data'] ?? [];
         <h1>LOGIN</h1>
         <?php loginInputs(); ?>
         <?php checkLoginErrors(); ?>
+        <br> <br>
     </div>
+    <br>
     <br>
 </div>
 <br>
