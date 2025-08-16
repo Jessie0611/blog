@@ -36,7 +36,7 @@ img:hover {
 }
 
 .heroImg {
-    max-width: 100%;
+    max-width: 40%;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -59,8 +59,8 @@ img:hover {
 
 }
 
-a:hover {
-    background-color: #v;
+.navLinks a:hover {
+    background-color: #182447;
 
 }
 
@@ -128,7 +128,7 @@ h4 {
 .createAccountForm button {
     padding: 0.4rem;
     font-weight: bold;
-    max-width: 105px;
+    max-width: 110px;
     background-color: #A09CC2;
     color: #ffffff;
     border: none;
@@ -136,16 +136,6 @@ h4 {
     cursor: pointer;
 }
 
-.createAccountForm button {
-    padding: 0.4rem;
-    font-weight: bold;
-    max-width: 105px;
-    background-color: #A09CC2;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
 .createAccountForm button:hover {
     background-color: #182447;

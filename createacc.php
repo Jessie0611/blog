@@ -21,21 +21,20 @@ $loginData = $_SESSION['login_data'] ?? [];
 <div class="create">
     <br> <br> <br>
     <div style="flex: 1 1 350px; max-width: 400px;">
+        <br>
         <h1>CREATE ACCOUNT</h1>
+        <br>
         <?php signupInputs(); ?>
         <?php checkSignupErrors(); ?>
-        <br>
 
     </div>
 
     <div style="flex: 1 1 300px; max-width: 400px;">
+        <br>
         <h1>LOGIN</h1>
+        <br>
         <?php loginInputs(); ?>
         <?php checkLoginErrors(); ?>
-        <br> <br>
     </div>
-    <br>
-    <br>
 </div>
-<br>
 <?php include 'footer.php'; ?>

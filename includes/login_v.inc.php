@@ -7,10 +7,10 @@ function loginInputs()
     $loginUsername = $_SESSION["login_data"]["loginUsername"] ?? '';
 
     echo '<form action="includes/login.inc.php" method="POST" class="createAccountForm" novalidate>';
-    echo '<input type="text" name="loginUsername" placeholder="Username" value="' . htmlspecialchars($loginUsername) . '">';
+    echo '<input type="text" name="loginUsername" placeholder="Author Name" value="' . htmlspecialchars($loginUsername) . '">';
     echo '<input type="password" name="loginPassword" placeholder="Password">';
-    echo '<button type="submit" name="login">Login</button>';
-    echo '</form>';
+    echo '<br><button type="submit" name="login">Login</button> <br>';
+    echo '<br></form><br>';
 
     unset($_SESSION["login_data"]);
 }

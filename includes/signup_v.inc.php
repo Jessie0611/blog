@@ -17,8 +17,8 @@ function signupInputs()
     echo '<input type="password" name="pwd" placeholder="Password">';
     echo '<input type="text" name="email" placeholder="E-Mail" value="' . (!$emailUsed && !$invalidEmail ? htmlspecialchars($email) : '') . '">';
 
-    echo '<button type="submit" name="createAccount">Create Account</button>';
-    echo '</form>';
+    echo '<br><button type="submit" name="createAccount">Create Account</button><br>';
+    echo '<br></form><br>';
 
     unset($_SESSION['signup_data']);
 }
