@@ -1,0 +1,254 @@
+/* Bridgerton theme stylesheet
+   Add <link rel="stylesheet" href="/dashboard/blog/bridgerton.css"> in <head>
+   Designed to pair with Playfair Display (serif) and Quicksand (sans)
+*/
+:root {
+    --bg-cream: #F8F1EC;
+    --panel: #FFF8F3;
+    --accent-petal: #F6E6F0;
+    --accent-gold: #C59D5F;
+    --text-dark: #342726;
+    --muted: #7A6A68;
+    --card-shadow: 0 8px 18px rgba(52, 39, 38, 0.08);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Quicksand, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: var(--bg-cream);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--text-dark);
+    margin: 0 0 .6rem
+}
+
+h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.4px
+}
+
+h2 {
+    font-size: 1.6rem
+}
+
+.lead {
+    font-size: 1.05rem;
+    color: var(--muted)
+}
+
+/* Header/Hero */
+.site-header {
+    background: linear-gradient(180deg, rgba(246, 230, 240, 0.9), rgba(255, 248, 243, 0.85));
+    padding: 28px 20px;
+    border-bottom: 1px solid rgba(213, 187, 170, 0.3)
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px
+}
+
+.brand .logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--card-shadow);
+    font-family: 'Playfair Display';
+    font-weight: 700;
+    color: var(--accent-gold)
+}
+
+.brand h1 {
+    font-size: 1.3rem
+}
+
+.site-nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 600
+}
+
+.site-nav a.button {
+    background: var(--accent-gold);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px
+}
+
+/* Main layout */
+.container {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 20px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px
+}
+
+.card {
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(213, 187, 170, 0.12);
+    transition: transform .18s ease, box-shadow .18s ease
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(52, 39, 38, 0.12)
+}
+
+.card .meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 8px
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px
+}
+
+.card h3 {
+    margin: 10px 0
+}
+
+.card p {
+    color: var(--muted);
+    margin: 0
+}
+
+/* Post view */
+.post-hero {
+    background: linear-gradient(180deg, rgba(246, 230, 240, 0.5), rgba(255, 248, 243, 0.5));
+    padding: 36px;
+    border-radius: 14px;
+    margin-bottom: 18px
+}
+
+.post-content {
+    background: var(--panel);
+    padding: 26px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(213, 187, 170, 0.08)
+}
+
+.post-content p {
+    line-height: 1.75;
+    color: var(--text-dark)
+}
+
+/* Forms and buttons */
+.input,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(52, 39, 38, 0.08);
+    background: white;
+    font-size: 0.95rem
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--accent-gold);
+    color: white;
+    text-decoration: none;
+    font-weight: 600
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--text-dark);
+    border: 1px solid rgba(52, 39, 38, 0.06)
+}
+
+/* Footer */
+.site-footer {
+    padding: 28px 20px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(213, 187, 170, 0.08);
+    background: transparent
+}
+
+.site-footer .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px
+}
+
+.small {
+    font-size: 0.9rem;
+    color: var(--muted)
+}
+
+/* Utilities */
+.center {
+    text-align: center
+}
+
+.kicker {
+    display: inline-block;
+    background: var(--accent-petal);
+    color: var(--text-dark);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem
+}
+
+@media (max-width:760px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start
+    }
+
+    .site-nav {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap
+    }
+}

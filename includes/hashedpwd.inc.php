@@ -1,5 +1,5 @@
-<?php
-
+<?php //Custom Hashing (Salt + Pepper + SHA-256)
+//To protect non-password sensitive data (like emails, usernames) before storing in a DB.
 $sensitiveData = "username";
 $salt = bin2hex(random_bytes(16)); //gen randon str
 $pepper = "ASecretPepperStr";

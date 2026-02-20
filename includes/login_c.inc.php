@@ -4,11 +4,7 @@ declare(strict_types=1); //type declarations
 
 function isEmpty(string $username, string $pwd)
 {
-    if (empty($username) || empty($pwd)) {
-        return true;
-    } else {
-        return false;
-    }
+    return empty($username) || empty($pwd);
 }
 function isUsernameIncorrect(bool|array $results): bool
 {

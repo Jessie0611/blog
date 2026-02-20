@@ -1,11 +1,12 @@
 <?php
 require_once 'includes/dbh.inc.php';
+require_once 'includes/config.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { //Gets the user ID
     $userID = $_SESSION['id'] ?? 1;
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $status = $_POST['status'] ?? 'published';
+    $status = $_POST['status'] ?? 'published'; //status (published or draft)
 
 
     //load any recent drafts

@@ -1,6 +1,6 @@
 <?php
 //Forces PHP to use only cookies for storing the session ID
-ini_set('session.use_only_cookies', 1);
+ini_set('session.use_only_cookies', 1); //Forces PHP to use only cookies (not URLs) for session IDs
 //Prevents session fixation attacks, where an attacker tricks a user into using a specific session ID via a URL.
 //Avoids session leakage through browser history, logs, or referer headers.
 //-------------------------

@@ -1,49 +1,62 @@
 <?php
-require_once 'includes/config.php'; // Ensure session is started
-include 'includes/dbh.inc.php';
+// viewPost.php
+// Expects: data/posts.php which defines $posts as an array of posts.
+// Example URL: viewPost.php?id=1
+
+require_once 'data/posts.php';
+
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$post = null;
+foreach ($posts as $p) {
+    if (isset($p['id']) && (int)$p['id'] === $id) {
+        $post = $p;
+        break;
+    }
+}
 include 'header.php';
 
-// Check if post ID is provided in the URL
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "<p>Invalid post ID.</p>";
-    include 'footer.php';
-    exit();
-}
-
-$postID = (int)$_GET['id'];
-
-// Fetch the post from the database
-$stmt = $pdo->prepare("SELECT * FROM posts WHERE postID = :postID AND status = 'published'");
-$stmt->bindParam(':postID', $postID, PDO::PARAM_INT);
-$stmt->execute();
-$post = $stmt->fetch(PDO::FETCH_ASSOC);
-
 if (!$post) {
-    echo "<p>Sorry, the post could not be found or isn't published.</p>";
-    include 'footer.php';
-    exit();
-}
 ?>
-
-<section class="viewPost">
-    <div class="Vpost">
-
-        <h1><?= htmlspecialchars($post['title']) ?></h1>
-
-        <?php if (!empty($post['coverImage'])): ?>
-            <img src="uploads/<?= htmlspecialchars($post['coverImage']) ?>" alt="Cover Image" style="width: 70%; object-fit: cover; margin-bottom: 1rem;">
-        <?php endif; ?>
-
-        <p style="color: #888; font-size: 0.9rem;">
-            Published on <?= date('F j, Y, g:i a', strtotime($post['created_at'])) ?>
-        </p>
-
-        <div class="post-content" style="line-height: 1.6; font-size: 1.1rem;">
-            <?= nl2br(htmlspecialchars($post['content'])) ?>
+    <main class="container">
+        <div class="center" style="padding:60px 20px">
+            <h2>Post not found</h2>
+            <p class="lead">We couldn't find the post you're looking for. Try returning to the <a href="index.php">home page</a>.</p>
         </div>
+    </main>
+<?php
+    if (file_exists('footer.php')) include 'footer.php';
+    exit;
+}
 
-        <a href="index.php" style="display: inline-block; margin-top: 2rem; text-decoration: none; color: #A09CC2; font-size:large;">← Back to Home</a>
-</section>
-</div>
+// Render post
+?>
+<main class="container">
+    <article class="post-hero">
+        <?php if (!empty($post['image']) && file_exists($post['image'])): ?>
+            <img src="<?php echo htmlspecialchars($post['image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" style="width:100%;max-height:420px;object-fit:cover;border-radius:10px;margin-bottom:16px">
+        <?php endif; ?>
+        <div class="meta"><?php echo date('F j, Y', strtotime($post['date'])); ?> · <?php echo htmlspecialchars($post['category'] ?? ''); ?></div>
+        <h1><?php echo htmlspecialchars($post['title']); ?></h1>
+        <?php if (!empty($post['excerpt'])): ?>
+            <p class="lead" style="margin-top:8px"><?php echo htmlspecialchars($post['excerpt']); ?></p>
+        <?php endif; ?>
+    </article>
 
-<?php include 'footer.php'; ?>
+    <section class="post-content" style="margin-top:18px">
+        <?php
+        // Support content as string or as array of paragraphs
+        $content = $post['content'] ?? '';
+        if (is_array($content)) {
+            foreach ($content as $para) {
+                echo '<p>' . nl2br(htmlspecialchars($para)) . '</p>';
+            }
+        } else {
+            echo '<p>' . nl2br(htmlspecialchars($content)) . '</p>';
+        }
+        ?>
+    </section>
+</main>
+
+<?php
+include 'footer.php';
+?>

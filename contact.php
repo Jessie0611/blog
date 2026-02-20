@@ -1,14 +1,15 @@
 <?php
 require_once 'includes/dbh.inc.php';
+require_once 'includes/config.php';
 
 $success = false;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") { //accept only by post
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $message = $_POST['message'] ?? '';
 
-    try {
+    try { //Inserts the data securely using a prepared statement
         $stmt = $pdo->prepare("
           INSERT INTO contact_messages (name, email, message, submitted_at)
           VALUES (?, ?, ?, NOW())

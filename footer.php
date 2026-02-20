@@ -1,8 +1,9 @@
-<footer class="footer">
-    <h3>&copy; &nbsp; 2025 The Tea &nbsp;&nbsp;|&nbsp;&nbsp; All gossip served hot &nbsp; ☕ </h3>
+<footer class="site-footer">
+    <div class="inner">
+        <div class="small">&copy; <?php echo date('Y'); ?> Bridgerton Blog — All rights reserved.</div>
+        <div>
+            <a href="#" class="small">Terms</a> ·
+            <a href="#" class="small">Privacy</a>
+        </div>
+    </div>
 </footer>
-<script src="script.js"></script>
-</div>
-</body>
-
-</html>
